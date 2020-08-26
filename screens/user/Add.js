@@ -37,7 +37,8 @@ const EditProduct = (props) => {
     },[submitHandler])
 
 
-    return (
+    
+    return (-
         <TouchableWithoutFeedback onPress={() => {
             Keyboard.dismiss();
         }}>
@@ -51,7 +52,7 @@ const EditProduct = (props) => {
                         onChangeText={text => setTitle(text)}
                         autoCapitalize='sentences'
                         keyboardType='default' 
-                        autoCorrect 
+                        autoCorrect
                     />
                 </View>
                 <View style={styles.fonmControl}>
@@ -60,19 +61,14 @@ const EditProduct = (props) => {
                             style={styles.input}  
                             value={imageUrl} 
                             onChangeText={text => setImage(text)}
-                            returnKeyType='next' 
-                            
+                            keyboardType='numeric' 
                         />
                 </View>
                 {
                     !detail && (
                         <View style={styles.fonmControl}>
                             <Text style={styles.label}>Price</Text>
-                            <TextInput 
-                                style={styles.input} 
-                                value={price} 
-                                onChangeText={text => setPrice(text)}
-                                keyboardType='decimal-pad' 
+                            <TextInput style={styles.input} value={price} onChangeText={text => setPrice(text)} 
                             />
                         </View>
                     )
@@ -87,7 +83,6 @@ const EditProduct = (props) => {
         </TouchableWithoutFeedback>
     )
 }
-
 
 EditProduct.navigationOptions = (navData) => {
     const title= navData.navigation.getParam('productTitle');
@@ -108,12 +103,7 @@ EditProduct.navigationOptions = (navData) => {
     }
 }
 
-
-
 export default EditProduct
-
-
-
 
 const styles = StyleSheet.create({
     form:{

@@ -8,6 +8,8 @@ import CartScreen from "../screens/shop/CartScreen"
 import { createDrawerNavigator } from "react-navigation-drawer"
 import OrdersScreen from "../screens/shop/OrdersScreen"
 import { Ionicons } from "@expo/vector-icons"
+import UserProductScreen from '../screens/user/UserProductScreen';
+import EditProduct from '../screens/user/EditProduct';
 
 const ProductNavigator = createStackNavigator({
     ProductOverview : {
@@ -54,9 +56,33 @@ const OrderNavigator = createStackNavigator({
 
 )
 
+
+const AdminNavigator = createStackNavigator({
+    UsersProduct: UserProductScreen,
+    Edit: EditProduct
+},{
+    navigationOptions:{
+        drawerIcon: drawerConfig => <Ionicons name="md-contact"  size={23} color={drawerConfig.tintColor}  />
+    },
+    defaultNavigationOptions:{
+        headerStyle:{
+            backgroundColor: color.primary
+        },
+        headerTitleStyle:{
+            fontFamily:'open-sans-bold'
+        },
+        headerTintColor:'white'
+    }
+}
+
+)
+
+
+
 const ShopNavigator = createDrawerNavigator({
     Products : ProductNavigator,
-    Orders: OrderNavigator
+    Orders: OrderNavigator,
+    Admin:AdminNavigator
 },{
     contentOptions:{
         activeTintColor: color.primary

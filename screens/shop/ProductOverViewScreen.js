@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import ProductItem from '../../components/shop/ProductItem';
 
 import * as cartAction from "../../store/actions/cart";
 import CustomHeaderButton from '../../components/UI/HeaderButton';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import color from '../../constant/color';
 
 const ProductOverViewScreen = (props) => {
 
@@ -22,17 +23,31 @@ const ProductOverViewScreen = (props) => {
                     title={itemData.item.title}
                     price={itemData.item.price}
                     image={itemData.item.imageUrl}
-                    onViewDetail={() => {
+                    onSelect={() => {
                         props.navigation.navigate({routeName:'ProductDetails', params:{
                             productId:itemData.item.id,
                             productTitle:itemData.item.title
                         }})
                     }}
+                   
+                    
+               >
+                   <Button color={color.primary} title="View Details" 
+                    onPress={() => {
+                            props.navigation.navigate({routeName:'ProductDetails', params:{
+                                productId:itemData.item.id,
+                                productTitle:itemData.item.title
+                            }})
+                        }
+                   }/>
+                    <Button color={color.primary} title="Add to Cart" 
 
-                    onAddToCart = {() => {
-                        dispatch(cartAction.addToCart(itemData.item))
-                    }}
-               />
+                        onPress={() => {
+                            dispatch(cartAction.addToCart(itemData.item))
+                        }}
+                    />
+
+               </ProductItem>
             )}
         />
     )

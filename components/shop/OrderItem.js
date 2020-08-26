@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, TouchableNativeFeedba
 import color from '../../constant/color'
 import CartItem from './CartItem'
 import {Ionicons } from "@expo/vector-icons";
+
 const OrderItem = (props) => {
     const [showDetails, setShowDetails] = useState(false);
     return (
@@ -42,11 +43,7 @@ const OrderItem = (props) => {
     )
 }
 
-{/* <Button color={color.primary} title={showDetails ? 'Hide Details' : 'Show Details'} 
-onPress={()=>{
-    setShowDetails(prev => !prev)
-}}
-/> */}
+
 
 export default OrderItem
 
