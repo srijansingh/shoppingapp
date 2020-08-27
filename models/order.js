@@ -9,7 +9,7 @@ class Order{
     }
 
     get readableDate(){
-        return moment(this.date).format('DD MMMM YYYY, HH:MM')
+        return moment(this.date).format('DD MMMM YYYY, hh:mm')
     }
 }
 
