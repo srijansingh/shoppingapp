@@ -2,14 +2,25 @@ import React from 'react';
 import { createStackNavigator } from "react-navigation-stack"
 import ProductOverViewScreen from "../screens/shop/ProductOverViewScreen"
 import color from "../constant/color"
-import { createAppContainer } from "react-navigation"
+import { createAppContainer, createSwitchNavigator } from "react-navigation"
 import ProductDetailScreen from "../screens/shop/ProductDetailScreen"
 import CartScreen from "../screens/shop/CartScreen"
-import { createDrawerNavigator } from "react-navigation-drawer"
+import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer"
 import OrdersScreen from "../screens/shop/OrdersScreen"
 import { Ionicons } from "@expo/vector-icons"
 import UserProductScreen from '../screens/user/UserProductScreen';
 import EditProduct from '../screens/user/EditProduct';
+import AuthScreen from '../screens/user/AuthScreen';
+import StartupScreen from '../screens/StartupScreen';
+import { View, SafeAreaView, Button } from 'react-native';
+import { useDispatch } from 'react-redux';
+import * as authAction from "../store/actions/auth"
+
+
+
+
+
+
 
 const ProductNavigator = createStackNavigator({
     ProductOverview : {
@@ -86,8 +97,37 @@ const ShopNavigator = createDrawerNavigator({
 },{
     contentOptions:{
         activeTintColor: color.primary
+    },
+    contentComponent: props => {
+        const dispatch = useDispatch()
+        return (
+            <View style={{flex:1, paddingTop:36}}>
+                <SafeAreaView forceInset={{top:'always', horizontal:'never'}}>
+                    <DrawerItems {...props} />
+                    <Button 
+                        title="Logout" 
+                        color={color.primary} 
+                        onPress={() => {
+                            dispatch(authAction.logout())
+                        }}    
+                    />
+                </SafeAreaView>
+            </View>
+        )
+    }
+})
+
+const AuthNavigator = createStackNavigator({
+    Auth: {
+        screen:AuthScreen
     }
 })
 
 
-export default   createAppContainer(ShopNavigator)
+const MainNavigator = createSwitchNavigator({
+    Startup: StartupScreen,
+    Auth:AuthNavigator,
+    Shop: ShopNavigator
+})
+
+export default   createAppContainer(MainNavigator)
